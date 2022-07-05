@@ -6,18 +6,31 @@
 <mapper namespace="com.vam.mapper.BoardMapper">
 
 
-	<!-- 게시판 등록 -->
+	<!-- 게시글 등록 -->
 	<insert id="enroll">
 		<!-- 인자로 전달받은 dto의 getter함수를 자동으로 호출해서 매핑. -->
 		insert into vam_board(title, content, writer) values (#{title},
 		#{content}, #{writer})
 
 	</insert>
-	<!-- 게시판 목록 -->
+	<!-- 게시글 목록 -->
 	<select id="getList" resultType="com.vam.model.BoardVO">
 
-		select * from vam_board
+		select * from vam_board order by bno
 
 	</select>
+
+	<!-- 게시글 조회 -->
+	<select id="getPage" resultType="com.vam.model.BoardVO">
+
+		select * from vam_board where bno = #{bno}
+
+	</select>
+	
+	<!-- 게시글 수정 -->
+    <update id="modify">
+              <!-- Oracle -->    
+        update vam_board set title = #{title}, content = #{content}, updatedate = sysdate where bno = #{bno}
+    </update>
 
 </mapper>
