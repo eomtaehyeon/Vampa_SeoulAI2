@@ -93,7 +93,21 @@ thead {
 				</tr>
 			</c:forEach>
 		</table>
-		<form id="moveForm" method="get"></form>
+		<div class="pageInfo_wrap">
+			<div class="pageInfo_area">
+
+				<!-- 각 번호 페이지 버튼 -->
+				<c:forEach var="num" begin="${pageMaker.startPage}"
+					end="${pageMaker.endPage}">
+					<li class="pageInfo_btn"><a href="${num}">${num}</a></li>
+				</c:forEach>
+
+			</div>
+		</div>
+		<form id="moveForm" method="get">
+			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+			<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+		</form>
 	</div>
 
 	<script>
@@ -112,14 +126,14 @@ thead {
 				if (result === "enroll success") {
 					alert("등록이 완료되었습니다.");
 				}
-				
-				if(result === "modify success"){
-		            alert("수정이 완료되었습니다.");
-		        }
-				
-				 if(result === "delete success"){
-			            alert("삭제가 완료되었습니다.");
-			        }
+
+				if (result === "modify success") {
+					alert("수정이 완료되었습니다.");
+				}
+
+				if (result === "delete success") {
+					alert("삭제가 완료되었습니다.");
+				}
 
 			}
 
@@ -127,20 +141,26 @@ thead {
 
 		let moveForm = $("#moveForm");
 
-		$(".move").on("click", function(e){
-			e.preventDefault();
-			
-			let nameEle=$("input[name=bno]") 	// name이 bno인 요소
-			nameEle.remove();	// dom요소를 추가하기전에 기존의 dom요소를 제거하는 방식으로 해결했습니다.
-			
-			// 비어있는 moveForm에 동적으로 hidden input 으로 bno를 추가.
-			// 이것만 있으면 뒤로가기를 했을때 bno가 누적되는 현상이 발생한다.
-			// jquery는 자기.remove()로 지운다.
-			// vanilla js는 부모.removeChild(자식)으로 지운다.
-			moveForm.append("<input type='hidden' name='bno' value='"+ $(this).attr("href")+ "'>");
-			moveForm.attr("action", "/board/get");
-			moveForm.submit();
-			});
+		$(".move").on(
+				"click",
+				function(e) {
+					e.preventDefault();
+
+					let nameEle = $("input[name=bno]") // name이 bno인 요소
+					nameEle.remove(); // dom요소를 추가하기전에 기존의 dom요소를 제거하는 방식으로 해결했습니다.
+
+					// 비어있는 moveForm에 동적으로 hidden input 으로 bno를 추가.
+					// 이것만 있으면 뒤로가기를 했을때 bno가 누적되는 현상이 발생한다.
+					// jquery는 자기.remove()로 지운다.
+					// vanilla js는 부모.removeChild(자식)으로 지운다.
+					moveForm.append("<input type='hidden' name='bno' value='"
+							+ $(this).attr("href") + "'>");
+					moveForm.attr("action", "/board/get");
+					moveForm.submit();
+				});
+		$(".pageInfo a").on("click", function(e) {
+
+		});
 	</script>
 
 </body>
