@@ -116,6 +116,10 @@ thead {
 				if(result === "modify success"){
 		            alert("수정이 완료되었습니다.");
 		        }
+				
+				 if(result === "delete success"){
+			            alert("삭제가 완료되었습니다.");
+			        }
 
 			}
 
@@ -126,7 +130,7 @@ thead {
 		$(".move").on("click", function(e){
 			e.preventDefault();
 			
-			let nameEle=$("input[name=bno]") // name이 bno인 요소
+			let nameEle=$("input[name=bno]") 	// name이 bno인 요소
 			nameEle.remove();	// dom요소를 추가하기전에 기존의 dom요소를 제거하는 방식으로 해결했습니다.
 			
 			// 비어있는 moveForm에 동적으로 hidden input 으로 bno를 추가.

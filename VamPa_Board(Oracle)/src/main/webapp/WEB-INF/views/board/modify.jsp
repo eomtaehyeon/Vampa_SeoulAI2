@@ -53,6 +53,10 @@ textarea {
 	padding-left: 80px;
 	margin-top: 50px;
 }
+
+#delete_btn{
+    background-color: #f3e3e7;
+}
 </style>
 </head>
 <body>
@@ -86,6 +90,7 @@ textarea {
 		<div class="btn_wrap">
 			<a class="btn" id="list_btn">목록 페이지</a>
 			 <a class="btn"id="modify_btn">수정 완료</a>
+			 <a class="btn" id="delete_btn">삭제</a>
 			  <a class="btn" id="cancel_btn">수정 취소</a>
 		</div>
 	</form>
@@ -94,8 +99,8 @@ textarea {
 			value='<c:out value="${pageInfo.bno}"/>'>
 	</form>
 	<script>
-		let form = $("#infoForm"); // 페이지 이동 form(리스트 페이지 이동, 조회 페이지 이동)
-		let mForm = $("#modifyForm"); // 페이지 데이터 수정 from
+		let form = $("#infoForm"); 	// 페이지 이동 form(리스트 페이지 이동, 조회 페이지 이동)
+		let mForm = $("#modifyForm");	 // 페이지 데이터 수정 from
 
 		/* 목록 페이지 이동 버튼 */
 		$("#list_btn").on("click", function(e) {
@@ -108,6 +113,13 @@ textarea {
 		$("#modify_btn").on("click", function(e) {
 			mForm.submit();		// 화면에서 수정한 input 데이터들 날리기
 		});
+		
+		 /* 삭제 버튼 */
+	    $("#delete_btn").on("click", function(e){
+	        form.attr("action", "/board/delete");
+	        form.attr("method", "post");
+	        form.submit();
+	    });
 
 		/* 취소 버튼 */
 		$("#cancel_btn").on("click", function(e) {
