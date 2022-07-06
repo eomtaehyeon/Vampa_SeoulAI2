@@ -81,17 +81,19 @@ public class BoardController {
 	 * 이것을 URL Rewrite 처리라고 함
 	 */
 	@GetMapping("/get")
-	public void boardGetPageGET(int bno, Model model) {
+	public void boardGetPageGET(int bno, Model model, Criteria cri) {
 
 		model.addAttribute("pageInfo", bservice.getPage(bno));
+		model.addAttribute("cri", cri);
 
 	}
 
 	/* 수정 페이지 이동 */
 	@GetMapping("/modify")
-	public void boardModifyGET(int bno, Model model) {
+	public void boardModifyGET(int bno, Model model, Criteria cri) {
 
 		model.addAttribute("pageInfo", bservice.getPage(bno));
+		model.addAttribute("cri", cri);
 
 	}
 
